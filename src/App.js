@@ -1,5 +1,7 @@
+import { Button } from 'react-bootstrap';
+
 const App = () => {
-  return <div>App</div>;
+  return <Button>Init CRA</Button>;
 };
 
 export default App;
