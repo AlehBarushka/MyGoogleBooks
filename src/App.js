@@ -1,7 +1,9 @@
-import { Button } from 'react-bootstrap';
+import React from 'react';
+
+import Header from './components/Header';
 
 const App = () => {
-  return <Button>Init CRA</Button>;
+  return <Header />;
 };
 
 export default App;

@@ -1,0 +1,10 @@
+.header {
+  height: 200px;
+  background-image: url(/src/assets/background-header.jpg);
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.header h1 {
+  text-shadow: -1px -1px 1px rgba(255, 255, 255, 0.1), 1px 1px 1px rgba(0, 0, 0, 0.5);
+}
