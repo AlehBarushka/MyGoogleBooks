@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import {
   Col,
@@ -13,6 +14,12 @@ import {
 } from 'react-bootstrap';
 
 const SerchTermForm = () => {
+  const navigate = useNavigate();
+
+  const handleSubmit = () => {
+    navigate('/books/list');
+  };
+
   return (
     <Form>
       <FormGroup className='mt-2'>
@@ -20,7 +27,7 @@ const SerchTermForm = () => {
           <Col md={4}>
             <InputGroup>
               <FormControl placeholder='Search...' />
-              <Button size='sm' type='submit' variant='secondary' id='submit-button'>
+              <Button size='sm' onClick={handleSubmit} variant='secondary' id='submit-button'>
                 Search
               </Button>
             </InputGroup>
