@@ -18,7 +18,6 @@ export const googleBooksApi = {
    * @returns {Object} object with books.
    */
   async getBooks({ searchTerm, category = '', page = 0, sort = 'relevance' }) {
-    console.log(searchTerm);
     const startIndex = MAX_RESULTS * page;
 
     const response = await axios.get(
