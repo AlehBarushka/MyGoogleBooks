@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { Container, Col, Button, Row, Image } from 'react-bootstrap';
 import bookImg from '../../assets/book-sample.jpg';
 
-const BookItem = () => {
+const DetailsBookPage = () => {
   const navigate = useNavigate();
 
   const handleOnClick = () => {
@@ -37,4 +37,4 @@ const BookItem = () => {
   );
 };
 
-export default BookItem;
+export default DetailsBookPage;

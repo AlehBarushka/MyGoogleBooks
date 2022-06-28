@@ -7,9 +7,9 @@ import { GET_BOOKS_LIST_PENDING } from '../actions';
 
 function* getBooks({ payload }) {
   try {
-    const res = yield call(googleBooksApi.getBooks, payload);
+    const { totalItems, items } = yield call(googleBooksApi.getBooks, payload);
 
-    yield put(getBooksSuccess(res));
+    yield put(getBooksSuccess({ totalItems, items }));
   } catch ({ response: { data } }) {
     yield put(getBooksFailure(data.error));
   }

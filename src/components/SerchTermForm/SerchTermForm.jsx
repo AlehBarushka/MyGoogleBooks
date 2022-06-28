@@ -20,7 +20,9 @@ import { getBooks } from '../../actionCreators';
 
 const SerchTermForm = () => {
   const initialValues = { searchTerm: '', category: '', page: 0, sort: 'Relevance' };
+
   const [values, setValues] = useState(initialValues);
+  const [isInvalid, setIsInvalid] = useState(false);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -29,11 +31,20 @@ const SerchTermForm = () => {
     const { name, value } = e.target;
 
     setValues({ ...values, [name]: value });
+    setIsInvalid(false);
   };
 
-  const handleSubmit = async e => {
+  const handleSubmit = e => {
     e.preventDefault();
+
+    if (values.searchTerm === '') {
+      setIsInvalid(true);
+
+      return;
+    }
+
     dispatch(getBooks(values));
+
     navigate('books/list');
   };
 
@@ -44,11 +55,15 @@ const SerchTermForm = () => {
           <Col md={4}>
             <InputGroup>
               <FormControl
+                isInvalid={isInvalid}
                 name='searchTerm'
                 value={values.searchTerm}
                 onChange={handleOnChange}
                 placeholder='Search...'
               />
+              <FormControl.Feedback tooltip type='invalid'>
+                Required.
+              </FormControl.Feedback>
               <Button id='submit-button' size='sm' variant='secondary' type='submit'>
                 Search
               </Button>
