@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 import { CATEGORY_SELECT_OPTIONS, SORT_SELECT_OPTIONS } from '../../constants/form';
 
@@ -13,11 +15,15 @@ import {
   InputGroup,
   Button,
 } from 'react-bootstrap';
-import { googleBooksApi } from '../../services';
+
+import { getBooks } from '../../actionCreators';
 
 const SerchTermForm = () => {
   const initialValues = { searchTerm: '', category: '', page: 0, sort: 'Relevance' };
   const [values, setValues] = useState(initialValues);
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleOnChange = e => {
     const { name, value } = e.target;
@@ -27,7 +33,8 @@ const SerchTermForm = () => {
 
   const handleSubmit = async e => {
     e.preventDefault();
-    console.log(values);
+    dispatch(getBooks(values));
+    navigate('books/list');
   };
 
   return (
