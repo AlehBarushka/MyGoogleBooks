@@ -1,7 +1,6 @@
 import axios from 'axios';
 
-const BASE_URL = 'https://www.googleapis.com/books/v1/volumes';
-const MAX_RESULTS = 30;
+import { BASE_URL, MAX_RESULTS } from '../constants/api';
 
 /**
  * @typedef {Object} Options
