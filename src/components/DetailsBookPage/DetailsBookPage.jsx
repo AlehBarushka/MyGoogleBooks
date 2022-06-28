@@ -2,7 +2,8 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { Container, Col, Button, Row, Image } from 'react-bootstrap';
-import bookImg from '../../assets/book-sample.jpg';
+
+import noCover from '../../assets/no_cover_thumb.gif';
 
 const DetailsBookPage = () => {
   const navigate = useNavigate();
@@ -15,7 +16,7 @@ const DetailsBookPage = () => {
     <Container>
       <Row xs={1} md={2} className='mt-5'>
         <Col className='p-3 d-flex justify-content-center img-container'>
-          <Image className='shadow' src={bookImg} />
+          <Image className='shadow' src={noCover} />
         </Col>
         <Col className='pt-2 px-5'>
           <div className='fw-light mb-3'>Books category</div>
