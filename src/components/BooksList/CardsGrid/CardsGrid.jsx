@@ -3,39 +3,37 @@ import { Link } from 'react-router-dom';
 
 import { Row, Col, Card } from 'react-bootstrap';
 
-import bookSample from '../../../assets/book-sample.jpg';
+import noCover from '../../../assets/no_cover_thumb.gif';
 
-const CardsGrid = () => {
-  const booksSample = [
-    { title: 'Sample', author: 'Jon Doe', category: 'Art' },
-    { title: 'Sample', author: 'Jon Doe', category: 'Art' },
-    { title: 'Sample', author: 'Jon Doe', category: 'Art' },
-    { title: 'Sample', author: 'Jon Doe', category: 'Art' },
-    { title: 'Sample', author: 'Jon Doe', category: 'Art' },
-  ];
-
+const CardsGrid = ({ books }) => {
   return (
     <Row xs={1} md={2} lg={3} xl={4} className='g-4 mt-3'>
-      {booksSample.map((el, index) => {
-        return (
-          <Link to={'/books/id'} key={index} className='text-decoration-none text-reset'>
-            <Col>
-              <Card>
-                <div className='p-5'>
-                  <Card.Img className='shadow' src={bookSample} />
+      {books?.length > 0 &&
+        books.map(el => {
+          const authors = el.volumeInfo.authors?.join(', ');
+          const img = el.volumeInfo.imageLinks?.thumbnail;
+          const title = el.volumeInfo.title;
+          const firstCategory = el.volumeInfo.categories?.[0];
+
+          return (
+            <Col key={el.id}>
+              <Card bg='light'>
+                <div className='card-img-contaier d-flex justify-content-center p-5'>
+                  <Link to={`/books/${el.id}`} className='text-decoration-none text-reset'>
+                    <Card.Img className='shadow' src={img || noCover} />
+                  </Link>
                 </div>
                 <Card.Body>
-                  <Card.Subtitle className='fw-light text-decoration-underline mb-2'>
-                    {el.category}
+                  <Card.Subtitle className='fw-light text-decoration-underline my-2'>
+                    {firstCategory}
                   </Card.Subtitle>
-                  <Card.Title>{el.title}</Card.Title>
-                  <Card.Text className='fw-light'>{el.author}</Card.Text>
+                  <Card.Title>{title}</Card.Title>
+                  <Card.Text className='fw-light'>{authors}</Card.Text>
                 </Card.Body>
               </Card>
             </Col>
-          </Link>
-        );
-      })}
+          );
+        })}
     </Row>
   );
 };

@@ -1,7 +1,6 @@
 import axios from 'axios';
 
-const BASE_URL = 'https://www.googleapis.com/books/v1/volumes';
-const MAX_RESULTS = 30;
+import { BASE_URL, MAX_RESULTS } from '../constants/api';
 
 /**
  * @typedef {Object} Options
@@ -18,11 +17,10 @@ export const googleBooksApi = {
    * @returns {Object} object with books.
    */
   async getBooks({ searchTerm, category = '', page = 0, sort = 'relevance' }) {
-    console.log(searchTerm);
     const startIndex = MAX_RESULTS * page;
 
     const response = await axios.get(
-      `${BASE_URL}?q=intitle:${searchTerm}+subject:${category}&maxResults=${MAX_RESULTS}&startIndex=${startIndex}&orderBy=${sort}&key=${process.env.REACT_APP_API_KEY}`,
+      `${BASE_URL}?q=${searchTerm}+subject:${category}&maxResults=${MAX_RESULTS}&startIndex=${startIndex}&orderBy=${sort}&key=${process.env.REACT_APP_API_KEY}`,
     );
 
     return response.data;
