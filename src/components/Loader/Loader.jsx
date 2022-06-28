@@ -5,7 +5,7 @@ import { Row } from 'react-bootstrap';
 
 const Loader = () => {
   return (
-    <Row className='justify-content-center mt-3'>
+    <Row className='justify-content-center mt-5'>
       <Spinner animation='border' variant='secondary' />
     </Row>
   );
