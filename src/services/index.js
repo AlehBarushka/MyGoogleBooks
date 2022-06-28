@@ -20,7 +20,7 @@ export const googleBooksApi = {
     const startIndex = MAX_RESULTS * page;
 
     const response = await axios.get(
-      `${BASE_URL}?q=intitle:${searchTerm}+subject:${category}&maxResults=${MAX_RESULTS}&startIndex=${startIndex}&orderBy=${sort}&key=${process.env.REACT_APP_API_KEY}`,
+      `${BASE_URL}?q=${searchTerm}+subject:${category}&maxResults=${MAX_RESULTS}&startIndex=${startIndex}&orderBy=${sort}&key=${process.env.REACT_APP_API_KEY}`,
     );
 
     return response.data;
