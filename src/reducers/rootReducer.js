@@ -1,6 +1,7 @@
 import { combineReducers } from 'redux';
-import volumeReducer from './volumeList';
 
-const rootReducer = combineReducers({ volumeList: volumeReducer });
+import volumeListReducer from './volumeList';
+
+const rootReducer = combineReducers({ volumeList: volumeListReducer });
 
 export default rootReducer;
