@@ -1,6 +1,8 @@
 import React, { useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+
+import { getMoreBooks } from '../../actionCreators';
 
 import { MAX_RESULTS } from '../../constants/api';
 
@@ -10,8 +12,17 @@ import Loader from '../Loader';
 import CardsGrid from './CardsGrid';
 
 const BooksList = () => {
-  const { isLoading, total, books } = useSelector(state => state.volumeList);
+  const { isLoading, isLoadingButton, total, books, searchTerm } = useSelector(
+    state => state.volumeList,
+  );
+
+  const currentPage = searchTerm.page;
+  const nextPage = currentPage + 1;
+
+  const remainder = nextPage * MAX_RESULTS;
+
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   //This effect is intended to redirect to the home page after reloadding the page with a list of books
   useEffect(() => {
@@ -20,8 +31,12 @@ const BooksList = () => {
     }
   }, [books, isLoading, navigate]);
 
+  const handleOnClick = () => {
+    dispatch(getMoreBooks({ ...searchTerm, page: nextPage }));
+  };
+
   return (
-    <Container>
+    <Container className='mb-5'>
       {isLoading ? (
         <Loader />
       ) : (
@@ -29,11 +44,13 @@ const BooksList = () => {
           <div className='mt-3 text-center fw-bold'>Found {total} result</div>
           <CardsGrid books={books} />
           <div className='text-center'>
-            {total > MAX_RESULTS && (
-              <Button className='px-5 mt-3 mb-5' variant='outline-secondary'>
-                Load more...
-              </Button>
-            )}
+            <Button
+              onClick={handleOnClick}
+              disabled={isLoadingButton || total < remainder}
+              className='px-5 mt-3 mb-5'
+              variant='outline-secondary'>
+              {isLoadingButton ? 'Loading...' : 'Load more...'}
+            </Button>
           </div>
         </>
       )}
