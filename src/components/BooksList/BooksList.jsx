@@ -13,7 +13,7 @@ const BooksList = () => {
   const { isLoading, total, books } = useSelector(state => state.volumeList);
   const navigate = useNavigate();
 
-  //This effect is intended to redirect to the home page after updating the main page with a list of books
+  //This effect is intended to redirect to the home page after reloadding the page with a list of books
   useEffect(() => {
     if (!isLoading && books?.length === 0) {
       navigate('/', { replace: true });
