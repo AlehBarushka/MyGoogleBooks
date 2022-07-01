@@ -19,7 +19,7 @@ const BooksList = () => {
   const currentPage = searchTerm.page;
   const nextPage = currentPage + 1;
 
-  const remainder = nextPage * MAX_RESULTS;
+  const possibleCount = nextPage * MAX_RESULTS;
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -44,13 +44,15 @@ const BooksList = () => {
           <div className='mt-3 text-center fw-bold'>Found {total} result</div>
           <CardsGrid books={books} />
           <div className='text-center'>
-            <Button
-              onClick={handleOnClick}
-              disabled={isLoadingButton || total < remainder}
-              className='px-5 mt-3 mb-5'
-              variant='outline-secondary'>
-              {isLoadingButton ? 'Loading...' : 'Load more...'}
-            </Button>
+            {total > 0 && (
+              <Button
+                onClick={handleOnClick}
+                disabled={isLoadingButton || total <= possibleCount}
+                className='px-5 mt-3 mb-5'
+                variant='outline-secondary'>
+                {isLoadingButton ? 'Loading...' : 'Load more...'}
+              </Button>
+            )}
           </div>
         </>
       )}
